@@ -1,8 +1,18 @@
-import React from 'react'
+
+// components
+import CabinTable from "../ui/CabinTable";
 
 const Cabins = () => {
+
+
     return (
-        <div>Cabins</div>
+        <>
+            <header className="flex justify-between">
+                <h1>Сви апартмани</h1>
+                <p>Филтер / Сортирај</p>
+            </header>
+            <CabinTable />
+        </>
     )
 }
 
