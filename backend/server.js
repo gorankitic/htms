@@ -2,9 +2,27 @@ const express = require("express");
 const colors = require("colors/safe");
 const mongoose = require("mongoose");
 
+const AppError = require("./utils/AppError");
+const globalErrorHandler = require("./controllers/errorController");
+
+const cabinRouter = require("./routes/cabinRoutes");
+
 require("dotenv").config();
 
+// Initialize express application
 const app = express();
+
+// Middlewares
+app.use(express.json());
+
+// (Routers)
+app.use("/api/cabins", cabinRouter);
+app.all("*", (req, res, next) => {
+    next(new AppError(`Can't find ${req.originalUrl} on this server.`, 404));
+});
+
+// Global error handling middleware
+app.use(globalErrorHandler);
 
 const port = process.env.PORT || 3000;
 (async () => {

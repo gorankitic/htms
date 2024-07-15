@@ -26,6 +26,6 @@ const cabinSchema = mongoose.Schema({
     }
 }, { timestamps: true });
 
-const Cabin = mongoose.Model("Cabin", cabinSchema);
+const Cabin = mongoose.model("Cabin", cabinSchema);
 
 module.exports = Cabin;
