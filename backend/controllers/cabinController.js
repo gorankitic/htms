@@ -1,9 +1,10 @@
 const Cabin = require("../models/cabinModel");
+const catchAsync = require("../utils/catchAsync");
 
 // Find all cabins
 // GET method
 // Protected route /api/cabins
-exports.getCabins = async (req, res, next) => {
+exports.getCabins = catchAsync(async (req, res, next) => {
 
     const cabins = Cabin.find().sort({ name: 1 });
 
@@ -12,4 +13,4 @@ exports.getCabins = async (req, res, next) => {
         results: cabins.length,
         cabins
     });
-}
+});
