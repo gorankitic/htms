@@ -2,6 +2,7 @@
 // components
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
+import { Toaster } from "react-hot-toast";
 // pages
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
@@ -40,6 +41,7 @@ const App = () => {
                     <Route path="login" element={<Login />} />
                 </Routes>
             </BrowserRouter>
+            <Toaster position="top-right" />
         </QueryClientProvider>
     )
 }

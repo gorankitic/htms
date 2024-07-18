@@ -8,6 +8,18 @@ body {
     @apply text-[#444] font-['Roboto'];
 }
 
+input {
+    @apply px-2 py-2 border border-gray-200 rounded-md my-3
+}
+
+.btn-primary {
+    @apply bg-accent-400 text-white py-2 px-4 rounded-sm;
+}
+
+.btn-secondary {
+    @apply bg-white text-accent-600 py-2 px-4 border rounded-sm;
+}
+
 .active-navlink {
     @apply py-2 rounded-md w-full bg-slate-200 flex items-center justify-center gap-2 text-teal-600
 }

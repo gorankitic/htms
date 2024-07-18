@@ -9,7 +9,7 @@ const AppLayout = () => {
             <Sidebar />
             <div className="flex flex-col w-full">
                 <Header />
-                <main className="bg-slate-100 py-4 px-4 h-full">
+                <main className="bg-slate-100 h-full">
                     <Outlet />
                 </main>
             </div>

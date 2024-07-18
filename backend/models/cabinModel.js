@@ -9,9 +9,9 @@ const cabinSchema = mongoose.Schema({
         type: Number,
         required: [true, "You must provide cabin maximum capacity."],
     },
-    reqularPrice: {
+    regularPrice: {
         type: Number,
-        required: [true, "You must provide cabin regular price."],
+        required: [true, "You must provide cabin price."],
     },
     discount: {
         type: Number,

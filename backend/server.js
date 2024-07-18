@@ -1,6 +1,7 @@
 const express = require("express");
 const colors = require("colors/safe");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./controllers/errorController");
@@ -14,6 +15,7 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 // (Routers)
 app.use("/api/cabins", cabinRouter);
