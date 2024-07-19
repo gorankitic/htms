@@ -1,8 +1,10 @@
-import React from 'react'
+
+// components
+import UpdateSettingsForm from "../components/settings/UpdateSettingsForm";
 
 const Settings = () => {
     return (
-        <div>Settings</div>
+        <UpdateSettingsForm />
     )
 }
 

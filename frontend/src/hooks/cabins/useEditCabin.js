@@ -2,7 +2,7 @@
 // hooks
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 // services
-import { editCabin as editCabinApi } from "../services/apiCabins";
+import { editCabin as editCabinApi } from "../../services/apiCabins";
 // react-hot-toast
 import toast from "react-hot-toast";
 
