@@ -2,8 +2,8 @@
 // hooks
 import { useState } from "react";
 // components
-import CabinTable from "../ui/CabinTable";
-import CreateEditCabinForm from "../ui/CreateEditCabinForm";
+import CabinTable from "../components/CabinTable";
+import CreateEditCabinForm from "../components/CreateEditCabinForm";
 // assets
 import { HiOutlinePlus } from "react-icons/hi2";
 

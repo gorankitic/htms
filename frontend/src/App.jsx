@@ -1,7 +1,7 @@
 
 // components
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AppLayout from "./ui/AppLayout";
+import AppLayout from "./components/AppLayout";
 import { Toaster } from "react-hot-toast";
 // pages
 import Dashboard from "./pages/Dashboard";

@@ -7,6 +7,7 @@ const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./controllers/errorController");
 
 const cabinRouter = require("./routes/cabinRoutes");
+const settingsRouter = require("./routes/settingsRoutes");
 
 require("dotenv").config();
 
@@ -19,6 +20,7 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 // (Routers)
 app.use("/api/cabins", cabinRouter);
+app.use("/api/settings", settingsRouter);
 app.all("*", (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server.`, 404));
 });
