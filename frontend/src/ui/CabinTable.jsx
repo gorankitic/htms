@@ -4,7 +4,6 @@ import { useCabins } from "../hooks/useCabins";
 import CabinRow from "./CabinRow";
 import Spinner from "./Spinner";
 
-
 const CabinTable = () => {
     const { isLoading, data } = useCabins();
 

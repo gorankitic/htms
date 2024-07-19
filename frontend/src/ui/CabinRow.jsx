@@ -5,7 +5,6 @@ import CreateEditCabinForm from './CreateEditCabinForm';
 import { useState } from 'react';
 import { useDeleteCabin } from '../hooks/useDeleteCabin';
 
-
 const CabinRow = ({ cabin }) => {
     const [showForm, setShowForm] = useState(false);
     const { isDeleting, deleteCabin } = useDeleteCabin();
