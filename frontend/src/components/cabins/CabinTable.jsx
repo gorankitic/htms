@@ -1,5 +1,5 @@
 // hooks
-import { useCabins } from "../../hooks/useCabins";
+import { useCabins } from "../../hooks/cabins/useCabins";
 // components
 import CabinRow from "./CabinRow";
 import Spinner from "../Spinner";

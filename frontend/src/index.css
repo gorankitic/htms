@@ -9,11 +9,11 @@ body {
 }
 
 input {
-    @apply px-2 py-2 border border-gray-200 rounded-md my-3
+    @apply px-2 py-2 border border-gray-200 rounded-md mb-3
 }
 
 .btn-primary {
-    @apply bg-accent-400 text-white py-2 px-4 rounded-sm;
+    @apply bg-accent-400 text-white py-2 px-4 rounded-sm hover:bg-accent-300;
 }
 
 .btn-secondary {
