@@ -1,30 +1,15 @@
-// react-query
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-// services
-import { deleteCabin } from '../services/apiCabins';
+
 // components
 import CreateEditCabinForm from './CreateEditCabinForm';
 // hooks
 import { useState } from 'react';
-// react-hot-toast
-import toast from 'react-hot-toast';
+import { useDeleteCabin } from '../hooks/useDeleteCabin';
+
 
 const CabinRow = ({ cabin }) => {
     const [showForm, setShowForm] = useState(false);
+    const { isDeleting, deleteCabin } = useDeleteCabin();
     const { _id: cabinId, name, maxCapacity, regularPrice, discount } = cabin;
-
-    const queryClient = useQueryClient();
-
-    const { isLoading: isDeleting, mutate } = useMutation({
-        mutationFn: (id) => deleteCabin(id),
-        onSuccess: () => {
-            toast.success("Апартман обрисан!");
-            queryClient.invalidateQueries({
-                queryKey: ["cabins"]
-            });
-        },
-        onError: (err) => { toast.error(err.message) }
-    });
 
     return (
         <>
@@ -39,7 +24,7 @@ const CabinRow = ({ cabin }) => {
                         Измјени
                     </button>
 
-                    <button onClick={() => mutate(cabinId)} disabled={isDeleting}>
+                    <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
                         Обриши
                     </button>
                 </td>

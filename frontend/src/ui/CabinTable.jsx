@@ -1,16 +1,12 @@
+// hooks
+import { useCabins } from "../hooks/useCabins";
 // components
 import CabinRow from "./CabinRow";
 import Spinner from "./Spinner";
-// react-query
-import { useQuery } from "@tanstack/react-query";
-// services
-import { getCabins } from "../services/apiCabins";
+
 
 const CabinTable = () => {
-    const { isLoading, data, error } = useQuery({
-        queryKey: ["cabins"],
-        queryFn: getCabins,
-    });
+    const { isLoading, data } = useCabins();
 
     if (isLoading) {
         return (
