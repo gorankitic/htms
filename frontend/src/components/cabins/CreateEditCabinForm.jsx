@@ -1,7 +1,7 @@
 // hooks
 import { useForm } from "react-hook-form";
-import { useCreateCabin } from "../hooks/useCreateCabin";
-import { useEditCabin } from "../hooks/useEditCabin";
+import { useCreateCabin } from "../../hooks/useCreateCabin";
+import { useEditCabin } from "../../hooks/useEditCabin";
 
 const CreateEditCabinForm = ({ cabinToEdit = {} }) => {
     const { _id: editId, ...editValues } = cabinToEdit;

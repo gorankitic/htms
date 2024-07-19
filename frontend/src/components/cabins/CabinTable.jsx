@@ -1,8 +1,8 @@
 // hooks
-import { useCabins } from "../hooks/useCabins";
+import { useCabins } from "../../hooks/useCabins";
 // components
 import CabinRow from "./CabinRow";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 const CabinTable = () => {
     const { isLoading, data } = useCabins();
