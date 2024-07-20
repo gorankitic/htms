@@ -1,6 +1,7 @@
 
 // components
 import Modal from '../Modal';
+import Table from '../Table';
 import CreateEditCabinForm from './CreateEditCabinForm';
 import ConfirmDelete from '../ConfirmDelete';
 // hooks
@@ -11,13 +12,13 @@ const CabinRow = ({ cabin }) => {
     const { _id: cabinId, name, maxCapacity, regularPrice, discount } = cabin;
 
     return (
-        <tr className="grid grid-cols-6 gap-6 items-center bg-gray-50 border-b border-b-gray-200 tracking-wide py-4 px-4">
-            <th></th>
-            <th>{name}</th>
-            <th>{maxCapacity > 4 ? `${maxCapacity} особа` : `${maxCapacity} особе`}</th>
-            <th>{regularPrice} КМ</th>
-            <th>{discount ? `${discount} КМ` : <span>&mdash;</span>}</th>
-            <td className='flex gap-2'>
+        <Table.Row>
+            <div></div>
+            <div>{name}</div>
+            <div>{maxCapacity > 4 ? `${maxCapacity} особа` : `${maxCapacity} особе`}</div>
+            <div>{regularPrice} КМ</div>
+            <div>{discount ? `${discount} КМ` : <span>&mdash;</span>}</div>
+            <div className='flex gap-2'>
                 <Modal>
                     <Modal.Open opens="edit">
                         <button>
@@ -28,12 +29,12 @@ const CabinRow = ({ cabin }) => {
                         <CreateEditCabinForm cabinToEdit={cabin} />
                     </Modal.Window>
 
-                    <Modal.Open>
+                    <Modal.Open opens="delete">
                         <button>
                             Обриши
                         </button>
                     </Modal.Open>
-                    <Modal.Window>
+                    <Modal.Window name="delete">
                         <ConfirmDelete
                             resourceName={`апартман ${name}`}
                             disabled={isDeleting}
@@ -41,8 +42,8 @@ const CabinRow = ({ cabin }) => {
                         />
                     </Modal.Window>
                 </Modal>
-            </td>
-        </tr>
+            </div>
+        </Table.Row>
 
     )
 }
