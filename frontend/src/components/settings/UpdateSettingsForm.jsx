@@ -24,7 +24,7 @@ const UpdateSettingsForm = () => {
 
     return (
         <div className="mx-auto w-[600px] my-6">
-            <h1 className="font-medium text-xl text-center my-10">Подешавања</h1>
+            <h1 className="font-medium text-2xl text-center my-10">Подешавања</h1>
             <form className="my-6 flex flex-col">
                 <label>Максимална дужина резервације (број ноћења):</label>
                 <input
@@ -33,6 +33,7 @@ const UpdateSettingsForm = () => {
                     defaultValue={bookingLength}
                     disabled={isUpdating}
                     onBlur={(e) => handleUpdate(e, "bookingLength")}
+                    className="mb-4"
                 />
                 <label>Максималан број гостију (по резервацији):</label>
                 <input
@@ -40,6 +41,7 @@ const UpdateSettingsForm = () => {
                     id="maxGuestPerBooking"
                     defaultValue={maxGuestPerBooking}
                     onBlur={(e) => handleUpdate(e, "maxGuestPerBooking")}
+                    className="mb-4"
                 />
                 <label>Цијена доручка:</label>
                 <input
@@ -47,6 +49,7 @@ const UpdateSettingsForm = () => {
                     id="breakfastPrice"
                     defaultValue={breakfastPrice}
                     onBlur={(e) => handleUpdate(e, "breakfastPrice")}
+                    className="mb-4"
                 />
             </form>
         </div>

@@ -9,7 +9,7 @@ body {
 }
 
 input {
-    @apply px-2 py-2 border border-gray-200 rounded-md mb-3
+    @apply px-2 py-2 border border-gray-200 rounded-md
 }
 
 .btn-primary {
