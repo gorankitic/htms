@@ -3,6 +3,7 @@ import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 // assets
 import { HiXMark } from "react-icons/hi2";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 // Implement reusable modal - compound component pattern
 
@@ -27,14 +28,15 @@ const Open = ({ children, opens: opensWindow }) => {
     return cloneElement(children, { onClick: () => open(opensWindow) });
 }
 
-
 const Window = ({ children, name }) => {
     const { openName, close } = useContext(ModalContext);
+    const ref = useOutsideClick(close);
+
     if (name !== openName) return null;
 
     return createPortal(
         <div className="fixed top-0 left-0 w-full h-screen backdrop-filter backdrop-blur-sm">
-            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 rounded-md shadow-lg py-10 px-10 transition-all">
+            <div ref={ref} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-50 rounded-md shadow-lg py-10 px-10 transition-all">
                 <button
                     onClick={close}
                     className="bg-none border-none p-2 rounded-sm transition-transform absolute top-4 right-4 hover:bg-gray-200"

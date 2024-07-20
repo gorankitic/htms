@@ -18,4 +18,4 @@ const Cabins = () => {
     )
 }
 
-export default Cabins
+export default Cabins;
