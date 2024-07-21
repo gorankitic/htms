@@ -1,11 +1,19 @@
 // hooks
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateCabin } from "../../hooks/cabins/useCreateCabin";
 import { useEditCabin } from "../../hooks/cabins/useEditCabin";
+// components
+import { Link } from "react-router-dom";
+// uploadcare
+import { FileUploaderRegular } from '@uploadcare/react-uploader';
+import "@uploadcare/react-uploader/core.css"
+
 
 const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
     const { _id: editId, ...editValues } = cabinToEdit;
     const isEdit = Boolean(editId);
+    const [imageUrl, setImageUrl] = useState("");
 
     const { isCreating, createCabin } = useCreateCabin();
     const { isEditing, editCabin } = useEditCabin();
@@ -17,11 +25,14 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
     const isWorking = isCreating || isEditing;
 
     const onSubmit = (data) => {
-        if (isEdit) {
+        console.log(data)
+        if (isEdit && imageUrl !== "") {
+            data.imageUrl = imageUrl;
             editCabin({ newCabin: data, cabinId: editId }, {
                 onSuccess: () => onCloseModal?.()
             });
         } else {
+            data.imageUrl = imageUrl;
             createCabin(data, {
                 onSuccess: () => {
                     reset(getValues());
@@ -29,6 +40,10 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
                 }
             });
         }
+    }
+
+    const handleChangeEvent = (item) => {
+        setImageUrl(item.allEntries[0].cdnUrl);
     }
 
     return (
@@ -100,7 +115,18 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
                 {errors?.description?.message && <p className="-mt-1 text-red-600 pr-1">{errors.description.message}</p>}
 
                 <label htmlFor="imageUrl">Слика:</label>
-                <input type="file" accept="image/*" id="imageUrl" className="w-full" disabled={isWorking} />
+
+                <FileUploaderRegular
+                    pubkey={import.meta.env.VITE_UPLOADCARE_PUBKEY}
+                    maxLocalFileSizeBytes={4000000}
+                    multiple={false}
+                    imgOnly={true}
+                    sourceList="local"
+                    classNameUploader="my-config uc-light"
+                    onChange={handleChangeEvent}
+                />
+
+                {imageUrl && <Link to={imageUrl} target="blank">{imageUrl}</Link>}
 
                 <div className="ml-auto mt-4">
                     <button className="btn-secondary" type="reset" onClick={() => onCloseModal?.()}>Одбаци</button>

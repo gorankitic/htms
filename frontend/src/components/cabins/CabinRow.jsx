@@ -12,11 +12,11 @@ import { HiPencil, HiTrash } from 'react-icons/hi2';
 
 const CabinRow = ({ cabin }) => {
     const { isDeleting, deleteCabin } = useDeleteCabin();
-    const { _id: cabinId, name, maxCapacity, regularPrice, discount } = cabin;
+    const { _id: cabinId, name, maxCapacity, regularPrice, discount, imageUrl } = cabin;
 
     return (
         <Table.Row>
-            <div></div>
+            <img src={imageUrl} className="my-1 mx-auto object-cover h-[100px] w-[120px]" />
             <div>{name}</div>
             <div>{maxCapacity > 4 ? `${maxCapacity} особа` : `${maxCapacity} особе`}</div>
             <div>{regularPrice} КМ</div>
@@ -34,7 +34,7 @@ const CabinRow = ({ cabin }) => {
                         <Modal.Open opens="delete">
                             <Menu.Button icon={<HiTrash />}>Обриши</Menu.Button>
                         </Modal.Open>
-                    </Menu.List>
+                    </Menu.List >
 
                     <Modal.Window name="edit">
                         <CreateEditCabinForm cabinToEdit={cabin} />
@@ -47,8 +47,8 @@ const CabinRow = ({ cabin }) => {
                             onConfirm={() => deleteCabin(cabinId)}
                         />
                     </Modal.Window>
-                </Menu>
-            </Modal>
+                </Menu >
+            </Modal >
         </Table.Row >
     )
 }

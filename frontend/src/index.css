@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.my-config {
+    --uc-primary-oklch-dark: 69% 0.1768 258.4;
+    --uc-primary-oklch-light: 59% 0.22 264;
+}
+
 body {
     @apply text-[#444] font-['Roboto'];
 }

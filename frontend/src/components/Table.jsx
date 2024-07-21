@@ -37,7 +37,7 @@ const Row = ({ children }) => {
     return (
         <div
             role="row"
-            className={`grid ${columns} gap-6 items-center text-center bg-gray-50 border-b border-b-gray-200 tracking-wide py-4 px-4`}
+            className={`grid ${columns} gap-6 items-center justify-center text-center bg-gray-50 border-b border-b-gray-200 tracking-wide px-4`}
         >
             {children}
         </div>
