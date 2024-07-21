@@ -23,8 +23,6 @@ exports.createCabin = catchAsync(async (req, res) => {
 
     const cabin = await Cabin.create({ name, maxCapacity, regularPrice, discount, description, imageUrl });
 
-    console.log(cabin)
-
     res.status(201).json({
         _id: cabin._id,
         name: cabin.name,

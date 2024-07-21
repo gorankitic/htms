@@ -40,3 +40,7 @@ label {
 .navlink-icon {
     @apply mb-1 w-5 h-5 stroke-2;
 }
+
+.filter-button {
+    @apply border-none rounded-md font-medium text-sm uppercase transition-all py-1 px-2 hover:bg-teal-600 hover:text-teal-50;
+}

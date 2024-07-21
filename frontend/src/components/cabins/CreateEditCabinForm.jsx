@@ -25,7 +25,6 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
     const isWorking = isCreating || isEditing;
 
     const onSubmit = (data) => {
-        console.log(data)
         if (isEdit && imageUrl !== "") {
             data.imageUrl = imageUrl;
             editCabin({ newCabin: data, cabinId: editId }, {
@@ -96,6 +95,7 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
                     {...register("discount", {
                         validate: (value) => Number(value) <= Number(getValues().regularPrice) || "Попуст мора бити мањи од регуларне цијене."
                     })}
+                    defaultValue={0}
                     type="number"
                     id="discount"
                     placeholder="Попуст у КМ"
