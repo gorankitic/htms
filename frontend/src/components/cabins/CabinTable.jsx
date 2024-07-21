@@ -4,6 +4,7 @@ import { useCabins } from "../../hooks/cabins/useCabins";
 import CabinRow from "./CabinRow";
 import Spinner from "../Spinner";
 import Table from "../Table";
+import Menu from "../Menu";
 
 const CabinTable = () => {
     const { isLoading, data } = useCabins();
@@ -17,7 +18,7 @@ const CabinTable = () => {
     }
 
     return (
-        <>
+        <Menu>
             <Table columns="grid-cols-6">
                 <Table.Header >
                     <div></div>
@@ -32,7 +33,7 @@ const CabinTable = () => {
                     render={(cabin) => <CabinRow key={cabin._id} cabin={cabin} />}
                 />
             </Table>
-        </>
+        </Menu>
     )
 }
 

@@ -2,10 +2,13 @@
 // components
 import Modal from '../Modal';
 import Table from '../Table';
+import Menu from '../Menu';
 import CreateEditCabinForm from './CreateEditCabinForm';
 import ConfirmDelete from '../ConfirmDelete';
 // hooks
 import { useDeleteCabin } from '../../hooks/cabins/useDeleteCabin';
+// assets
+import { HiPencil, HiTrash } from 'react-icons/hi2';
 
 const CabinRow = ({ cabin }) => {
     const { isDeleting, deleteCabin } = useDeleteCabin();
@@ -18,22 +21,25 @@ const CabinRow = ({ cabin }) => {
             <div>{maxCapacity > 4 ? `${maxCapacity} особа` : `${maxCapacity} особе`}</div>
             <div>{regularPrice} КМ</div>
             <div>{discount ? `${discount} КМ` : <span>&mdash;</span>}</div>
-            <div className='flex gap-2'>
-                <Modal>
-                    <Modal.Open opens="edit">
-                        <button>
-                            Измјени
-                        </button>
-                    </Modal.Open>
+            <Modal>
+                <Menu>
+                    <Menu.Toggle id={cabinId} />
+                    <Menu.List id={cabinId}>
+
+                        <Modal.Open opens="edit">
+                            <Menu.Button icon={<HiPencil />}>Измјени</Menu.Button>
+                        </Modal.Open>
+
+
+                        <Modal.Open opens="delete">
+                            <Menu.Button icon={<HiTrash />}>Обриши</Menu.Button>
+                        </Modal.Open>
+                    </Menu.List>
+
                     <Modal.Window name="edit">
                         <CreateEditCabinForm cabinToEdit={cabin} />
                     </Modal.Window>
 
-                    <Modal.Open opens="delete">
-                        <button>
-                            Обриши
-                        </button>
-                    </Modal.Open>
                     <Modal.Window name="delete">
                         <ConfirmDelete
                             resourceName={`апартман ${name}`}
@@ -41,10 +47,9 @@ const CabinRow = ({ cabin }) => {
                             onConfirm={() => deleteCabin(cabinId)}
                         />
                     </Modal.Window>
-                </Modal>
-            </div>
-        </Table.Row>
-
+                </Menu>
+            </Modal>
+        </Table.Row >
     )
 }
 

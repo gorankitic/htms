@@ -33,7 +33,7 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
 
     return (
         <div className="mx-auto w-[600px]">
-            <h1 className="font-medium text-xl text-center">{isEdit ? "Измјени апартман:" : "Направи нови апартман:"}</h1>
+            <h1 className="font-medium text-2xl text-center text-teal-600">{isEdit ? "Измјени апартман:" : "Направи нови апартман:"}</h1>
             <form className="mt-6 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
 
                 <input
