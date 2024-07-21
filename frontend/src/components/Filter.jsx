@@ -26,6 +26,5 @@ const Filter = ({ filterField, options }) => {
         </div>
     )
 }
-// active:bg-teal-600 active:text-teal-100
 
 export default Filter;

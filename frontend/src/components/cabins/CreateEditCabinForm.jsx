@@ -25,8 +25,13 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
     const isWorking = isCreating || isEditing;
 
     const onSubmit = (data) => {
+        data.imageUrl = cabinToEdit.imageUrl;
         if (isEdit && imageUrl !== "") {
             data.imageUrl = imageUrl;
+            editCabin({ newCabin: data, cabinId: editId }, {
+                onSuccess: () => onCloseModal?.()
+            });
+        } else if (isEdit && imageUrl === "") {
             editCabin({ newCabin: data, cabinId: editId }, {
                 onSuccess: () => onCloseModal?.()
             });
@@ -115,7 +120,6 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
                 {errors?.description?.message && <p className="-mt-1 text-red-600 pr-1">{errors.description.message}</p>}
 
                 <label htmlFor="imageUrl">Слика:</label>
-
                 <FileUploaderRegular
                     pubkey={import.meta.env.VITE_UPLOADCARE_PUBKEY}
                     maxLocalFileSizeBytes={4000000}
@@ -125,7 +129,6 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
                     classNameUploader="my-config uc-light"
                     onChange={handleChangeEvent}
                 />
-
                 {imageUrl && <Link to={imageUrl} target="blank">{imageUrl}</Link>}
 
                 <div className="ml-auto mt-4">
