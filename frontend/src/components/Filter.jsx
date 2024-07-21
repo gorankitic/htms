@@ -19,6 +19,7 @@ const Filter = ({ filterField, options }) => {
                     key={option.value}
                     onClick={() => handleClick(option.value)}
                     className={twMerge("filter-button", (option.value === currentFilter) ? "bg-teal-600 text-teal-50" : "bg-gray-50")}
+                    disabled={option.value === currentFilter}
                 >
                     {option.label}
                 </button>
