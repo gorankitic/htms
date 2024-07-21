@@ -9,8 +9,8 @@ const Cabins = () => {
 
     return (
         <div className="max-w-screen-xl flex flex-col mx-auto mt-6 px-6">
-            <header className="flex justify-between">
-                <h1 className="font-semibold text-xl text-teal-600">Сви апартмани:</h1>
+            <header className="flex justify-between items-center">
+                <h1 className="font-medium uppercase">Сви апартмани:</h1>
                 <CabinTableOperations />
             </header>
             <CabinTable />

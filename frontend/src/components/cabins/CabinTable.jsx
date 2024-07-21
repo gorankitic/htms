@@ -21,10 +21,17 @@ const CabinTable = () => {
         );
     }
 
+    // Client-side filtering
     let filteredCabins;
     if (filterValue === "all") filteredCabins = data.cabins;
     if (filterValue === "no-discount") filteredCabins = data.cabins.filter(cabin => cabin.discount === 0);
     if (filterValue === "with-discount") filteredCabins = data.cabins.filter(cabin => cabin.discount > 0);
+
+    // Client-side sorting
+    const sortBy = searchParams.get("sortBy") || "name-asc";
+    const [field, direction] = sortBy.split("-");
+    const modifier = direction === "asc" ? 1 : -1;
+    const sortedCabins = filteredCabins?.sort((a, b) => typeof a[field] === "string" ? a[field].localeCompare(b[field]) * modifier : (a[field] - b[field]) * modifier);
 
     return (
         <Menu>
@@ -38,7 +45,7 @@ const CabinTable = () => {
                     <div></div>
                 </Table.Header>
                 <Table.Body
-                    data={filteredCabins}
+                    data={sortedCabins}
                     render={(cabin) => <CabinRow key={cabin._id} cabin={cabin} />}
                 />
             </Table>
