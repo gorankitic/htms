@@ -36,17 +36,19 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
             <h1 className="font-medium text-2xl text-center text-teal-600">{isEdit ? "Измјени апартман:" : "Направи нови апартман:"}</h1>
             <form className="mt-6 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
 
+                <label>Назив:</label>
                 <input
                     {...register("name", { required: "Ово поље је обавезно." })}
                     type="text"
                     id="name"
-                    placeholder="Назив апартмана"
+                    placeholder="нпр. апартман Зеленгора"
                     autoComplete="off"
                     disabled={isWorking}
-                    className="mt-3 mb-2"
+                    className="mb-2"
                 />
                 {errors?.name?.message && <p className="-mt-1 text-red-600 pr-1">{errors.name.message}</p>}
 
+                <label>Капацитет:</label>
                 <input
                     {...register("maxCapacity", {
                         required: "Ово поље је обавезно.",
@@ -54,12 +56,13 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
                     })}
                     type="number"
                     id="maxCapacity"
-                    placeholder="Капацитет"
+                    placeholder="нпр. 4 особе"
                     disabled={isWorking}
-                    className="mt-3 mb-2"
+                    className="mb-2"
                 />
                 {errors?.maxCapacity?.message && <p className="-mt-1 text-red-600 pr-1">{errors.maxCapacity.message}</p>}
 
+                <label>Цијена:</label>
                 <input
                     {...register("regularPrice", {
                         required: "Ово поље је обавезно.",
@@ -67,37 +70,37 @@ const CreateEditCabinForm = ({ cabinToEdit = {}, onCloseModal }) => {
                     })}
                     type="number"
                     id="regularPrice"
-                    placeholder="Цијена"
+                    placeholder="Цијена у КМ"
                     disabled={isWorking}
-                    className="mt-3 mb-2"
+                    className="mb-2"
                 />
                 {errors?.regularPrice?.message && <p className="-mt-1 text-red-600 pr-1">{errors.regularPrice.message}</p>}
 
+                <label>Попуст:</label>
                 <input
                     {...register("discount", {
                         validate: (value) => Number(value) <= Number(getValues().regularPrice) || "Попуст мора бити мањи од регуларне цијене."
                     })}
                     type="number"
                     id="discount"
-                    placeholder="Попуст"
+                    placeholder="Попуст у КМ"
                     disabled={isWorking}
-                    className="mt-3 mb-2"
+                    className="mb-2"
                 />
                 {errors?.discount?.message && <p className="-mt-1 text-red-600 pr-1">{errors.discount.message}</p>}
 
+                <label>Опис:</label>
                 <textarea
                     {...register("description", { required: "Ово поље је обавезно." })}
                     type="text"
                     id="description"
-                    className="h-20 px-2 py-2 my-3 border"
-                    placeholder="Опис апартмана..."
+                    className="h-20 px-2 py-2 mb-2 border"
+                    placeholder="Опишите изглед апартмана..."
                 />
                 {errors?.description?.message && <p className="-mt-1 text-red-600 pr-1">{errors.description.message}</p>}
 
-                <div className="flex items-center gap-4">
-                    <label htmlFor="imageUrl">Слика:</label>
-                    <input type="file" accept="image/*" id="imageUrl" className="w-full mt-3" disabled={isWorking} />
-                </div>
+                <label htmlFor="imageUrl">Слика:</label>
+                <input type="file" accept="image/*" id="imageUrl" className="w-full" disabled={isWorking} />
 
                 <div className="ml-auto mt-4">
                     <button className="btn-secondary" type="reset" onClick={() => onCloseModal?.()}>Одбаци</button>
