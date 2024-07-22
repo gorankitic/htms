@@ -24,7 +24,7 @@ const Header = ({ children }) => {
         <div
             role="row"
             as="header"
-            className={`grid ${columns} gap-6 items-center text-center bg-gray-200 border border-gray-200 rounded-sm uppercase tracking-wide font-medium py-4 px-4`}
+            className={`grid ${columns} gap-6 items-center text-center bg-gray-200 border border-gray-200 rounded-sm uppercase tracking-wide font-medium py-4 px-10`}
         >
             {children}
         </div >
@@ -37,7 +37,7 @@ const Row = ({ children }) => {
     return (
         <div
             role="row"
-            className={`grid ${columns} gap-6 items-center justify-center text-center bg-gray-50 border-b border-b-gray-200 tracking-wide px-4`}
+            className={`grid ${columns} gap-6 items-center justify-center text-center bg-gray-50 border-b border-b-gray-200 tracking-wide py-2 px-10`}
         >
             {children}
         </div>

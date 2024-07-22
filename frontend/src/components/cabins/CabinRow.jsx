@@ -16,7 +16,7 @@ const CabinRow = ({ cabin }) => {
 
     return (
         <Table.Row>
-            <img src={imageUrl} className="my-1 mx-auto object-cover h-[100px] w-[120px]" />
+            <img src={imageUrl} className="mx-auto object-cover h-[70px] w-[100px]" />
             <div>{name}</div>
             <div>{maxCapacity > 4 ? `${maxCapacity} особа` : `${maxCapacity} особе`}</div>
             <div>{regularPrice} КМ</div>

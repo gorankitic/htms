@@ -35,7 +35,7 @@ const CabinTable = () => {
 
     return (
         <Menu>
-            <Table columns="grid-cols-6">
+            <Table columns="grid-cols-cabins">
                 <Table.Header >
                     <div></div>
                     <div>Апартман</div>

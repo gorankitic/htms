@@ -44,3 +44,7 @@ label {
 .filter-button {
     @apply border-none rounded-md font-medium text-sm uppercase transition-all py-1 px-2 hover:bg-teal-600 hover:text-teal-50;
 }
+
+.tag {
+    @apply w-fit mx-auto uppercase py-1 px-2 rounded-xl text-sm;
+}

@@ -1,9 +1,9 @@
 // hooks
 import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 // assets
 import { HiXMark } from "react-icons/hi2";
-import { useOutsideClick } from "../hooks/useOutsideClick";
 
 // Implement reusable modal - compound component pattern
 

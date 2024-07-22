@@ -34,6 +34,10 @@ export default {
           950: "#382814",
         },
       },
+      gridTemplateColumns: {
+        'bookings': '1.4fr 1.8fr 2.2fr 1.4fr 1fr 3.2rem',
+        'cabins': '1.4fr 1.4fr 1.4fr 1fr 1fr 0.4fr',
+      }
     },
   },
   plugins: [],
