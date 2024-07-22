@@ -8,7 +8,6 @@ const guestSchema = mongoose.Schema({
     email: {
         type: String,
         required: [true, "You must provide a guest email."],
-        unique: true
     },
     nationalId: {
         type: String,
@@ -23,6 +22,6 @@ const guestSchema = mongoose.Schema({
     }
 }, { timestamps: true });
 
-const Guest = mongoose.Model("Guest", guestSchema);
+const Guest = mongoose.model("Guest", guestSchema);
 
 module.exports = Guest;

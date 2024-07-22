@@ -19,6 +19,10 @@ const bookingSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    totalPrice: {
+        type: Number,
+        requred: [true, "Booking must have a total price."]
+    },
     status: {
         type: String,
         enum: ["unconfirmed", "check-in", "check-out"],
@@ -39,8 +43,15 @@ const bookingSchema = mongoose.Schema({
         ref: "Cabin",
         required: [true, "Booking must have a cabinId."]
     }
-}, { timestamps: true });
+}, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } });
 
-const Booking = mongoose.Model("Booking", bookingSchema);
+// Pre-query mongoose hook to populate booking document with guest and cabin data
+bookingSchema.pre(/^find/, function (next) {
+    this.populate({ path: "guestId", select: "name email" })
+        .populate({ path: "cabinId", select: "name" })
+    next();
+});
+
+const Booking = mongoose.model("Booking", bookingSchema);
 
 module.exports = Booking;
