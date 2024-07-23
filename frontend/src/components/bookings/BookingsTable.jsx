@@ -1,6 +1,6 @@
 
 // hooks
-import { useBookings } from "../../hooks/cabins/useBookings";
+import { useBookings } from "../../hooks/bookings/useBookings";
 // components
 import Spinner from "../Spinner";
 import Table from "../Table";

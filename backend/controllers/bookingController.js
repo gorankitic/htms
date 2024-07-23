@@ -11,8 +11,22 @@ const catchAsync = require("../utils/catchAsync");
 // Find all bookings
 // GET method
 // Protected route /api/bookings
-exports.getBookings = catchAsync(async (req, res, next) => {
-    const bookings = await Booking.find();
+exports.getBookings = catchAsync(async (req, res) => {
+    // Filtering
+    // Remove the fields from req.query before using it to filter Booking collection
+    const queryObject = { ...req.query };
+    const excludedFields = ["page", "sortBy", "sort", "limit", "fields"];
+    excludedFields.forEach(el => delete queryObject[el]);
+    let query = Booking.find(queryObject);
+
+    // Sorting
+    if (req.query.sortBy) {
+        const sortBy = req.query.sortBy;
+        const [field, order] = sortBy.split("-");
+        const sortObject = { [field]: order === "desc" ? -1 : 1 };
+        query = query.sort(sortObject);
+    }
+    const bookings = await query;
 
     res.status(200).json({
         status: "success",

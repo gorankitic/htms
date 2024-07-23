@@ -1,4 +1,3 @@
-
 // libs
 import { format, isToday } from "date-fns";
 import { formatDistanceFromNow } from "../../utils";
@@ -6,11 +5,8 @@ import { twMerge } from "tailwind-merge";
 // components
 import Table from "../Table";
 
-
 const BookingRow = ({ booking }) => {
     const { _id, startDate, endDate, numNights, totalPrice, status, guestId: { name: guestName, email }, cabinId: { name: cabinName } } = booking;
-
-    console.log(isToday(new Date(startDate)))
 
     return (
         <Table.Row>
