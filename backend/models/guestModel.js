@@ -17,9 +17,6 @@ const guestSchema = mongoose.Schema({
         type: String,
         required: [true, "You must provide a guest nationality."]
     },
-    countryFlag: {
-        type: String
-    }
 }, { timestamps: true });
 
 const Guest = mongoose.model("Guest", guestSchema);

@@ -27,7 +27,7 @@ const BookingRow = ({ booking }) => {
                     {format(new Date(startDate), "dd.MM.yyyy")} &mdash;{" "}{format(new Date(endDate), "dd.MM.yyyy")}
                 </span>
             </div>
-            <div className={twMerge("tag", status === "непотврђен" ? "bg-blue-100 text-blue-600" : status === "пријављен" ? "bg-teal-100 text-teal-600" : "bg-slate-100 text-slate-600")}>
+            <div className={twMerge("tag", status === "непотврђен" ? "bg-blue-200 text-blue-600" : status === "пријављен" ? "bg-teal-200 text-teal-600" : "bg-slate-200 text-slate-600")}>
                 {status}
             </div>
             <div>{totalPrice} КМ</div>

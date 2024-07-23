@@ -46,5 +46,5 @@ label {
 }
 
 .tag {
-    @apply w-fit mx-auto uppercase py-1 px-2 rounded-xl text-sm;
+    @apply w-full mx-auto uppercase py-1 px-2 rounded-xl text-sm;
 }

@@ -3,32 +3,34 @@ const mongoose = require("mongoose");
 const bookingSchema = mongoose.Schema({
     startDate: {
         type: Date,
-        required: [true, "Reservation must have a start date."]
+        required: [true, "Резервација мора имати дефинисан почетни дан."]
     },
     endDate: {
         type: Date,
-        required: [true, "Reservation must have a end date."]
+        required: [true, "Резервација мора имати дефинисан задњи дан."]
     },
-    numNights: Number,
-    numGuests: Number,
-    cabinPrice: {
+    numNights: {
         type: Number,
-        required: [true, "Booking must have a cabin price."],
+        required: [true, "Резервација мора имати дефинисан број ноћења."]
     },
-    extraPrice: {
+    numGuests: {
         type: Number,
-        default: 0
+        required: [true, "Резервација мора имати дефинисан број гостију."],
     },
     totalPrice: {
         type: Number,
-        requred: [true, "Booking must have a total price."]
+        requred: [true, "Резервација мора имати дефинисану коначну цијену."]
     },
     status: {
         type: String,
-        enum: ["unconfirmed", "check-in", "check-out"],
-        default: "unconfirmed",
+        enum: ["непотврђен", "пријављен", "одјављен"],
+        default: "непотврђен",
     },
     isPaid: {
+        type: Boolean,
+        default: false
+    },
+    hasBreakfast: {
         type: Boolean,
         default: false
     },
@@ -36,12 +38,12 @@ const bookingSchema = mongoose.Schema({
     guestId: {
         type: mongoose.Schema.ObjectId,
         ref: "Guest",
-        required: [true, "Booking must have a guestId."]
+        required: [true, "Резервација мора садржати госта."]
     },
     cabinId: {
         type: mongoose.Schema.ObjectId,
         ref: "Cabin",
-        required: [true, "Booking must have a cabinId."]
+        required: [true, "Резервација мора садржати апартман."]
     }
 }, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } });
 
