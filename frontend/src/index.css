@@ -48,3 +48,7 @@ label {
 .tag {
     @apply w-full mx-auto uppercase py-1 px-2 rounded-xl text-sm;
 }
+
+.pagination-button {
+    @apply flex items-center gap-[2px] justify-center p-1 rounded-sm transition-all hover:bg-teal-600 hover:text-teal-50 disabled:bg-gray-200 disabled:text-gray-400;
+}

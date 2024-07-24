@@ -26,12 +26,26 @@ exports.getBookings = catchAsync(async (req, res) => {
         const sortObject = { [field]: order === "desc" ? -1 : 1 };
         query = query.sort(sortObject);
     }
+
+    // Pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 10;
+    const skip = (page - 1) * limit;
+    query = query.skip(skip).limit(limit);
+
+    // Check if there are more pages
+    const totalDocs = await Booking.countDocuments(queryObject);
+    const totalPages = Math.ceil(totalDocs / limit);
+    const hasMorePages = page < totalPages;
+
     const bookings = await query;
 
     res.status(200).json({
         status: "success",
-        results: bookings.length,
-        bookings
+        hasMorePages,
+        totalDocs,
+        totalPages,
+        bookings,
     });
 });
 

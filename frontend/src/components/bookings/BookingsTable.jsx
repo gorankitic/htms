@@ -1,10 +1,10 @@
-
 // hooks
 import { useBookings } from "../../hooks/bookings/useBookings";
 // components
 import Spinner from "../Spinner";
 import Table from "../Table";
 import BookingRow from "./BookingRow";
+import Pagination from "../Pagination";
 
 const BookingsTable = () => {
     const { data, isLoading } = useBookings();
@@ -31,6 +31,9 @@ const BookingsTable = () => {
                 data={data.bookings}
                 render={(booking) => <BookingRow key={booking._id} booking={booking} />}
             />
+            <Table.Footer>
+                <Pagination count={data.totalDocs} numPages={data.totalPages} />
+            </Table.Footer>
         </Table>
     )
 }

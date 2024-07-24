@@ -54,8 +54,17 @@ const Body = ({ data, render }) => {
     )
 }
 
+const Footer = ({ children }) => {
+    return (
+        <footer>
+            {children}
+        </footer >
+    )
+}
+
 Table.Header = Header;
 Table.Body = Body;
 Table.Row = Row;
+Table.Footer = Footer;
 
 export default Table;

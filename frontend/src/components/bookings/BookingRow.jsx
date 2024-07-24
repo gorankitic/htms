@@ -1,6 +1,6 @@
 // libs
 import { format, isToday } from "date-fns";
-import { formatDistanceFromNow } from "../../utils";
+import { formatDistanceFromNow } from "../../utils/utils";
 import { twMerge } from "tailwind-merge";
 // components
 import Table from "../Table";
@@ -23,7 +23,7 @@ const BookingRow = ({ booking }) => {
                     {format(new Date(startDate), "dd.MM.yyyy")} &mdash;{" "}{format(new Date(endDate), "dd.MM.yyyy")}
                 </span>
             </div>
-            <div className={twMerge("tag", status === "непотврђен" ? "bg-blue-200 text-blue-600" : status === "пријављен" ? "bg-teal-200 text-teal-600" : "bg-slate-200 text-slate-600")}>
+            <div className={twMerge("tag", status === "непотврђен" ? "bg-blue-500 text-blue-50" : status === "пријављен" ? "bg-teal-500 text-teal-50" : "bg-slate-200 text-slate-600")}>
                 {status}
             </div>
             <div>{totalPrice} КМ</div>
