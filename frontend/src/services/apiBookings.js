@@ -19,3 +19,14 @@ export const getBookings = async (filter, sortBy, page, limit) => {
 
     return json;
 }
+
+export const getBooking = async (bookingId) => {
+    const response = await fetch(`http://localhost:3000/api/bookings/${bookingId}`, { credentials: "include" });
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+
+    return json;
+}

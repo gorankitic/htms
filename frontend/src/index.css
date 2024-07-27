@@ -46,7 +46,7 @@ label {
 }
 
 .tag {
-    @apply w-full mx-auto uppercase py-1 px-2 rounded-xl text-sm;
+    @apply w-32 h-fit mx-auto uppercase py-1 px-2 rounded-xl text-sm text-center;
 }
 
 .pagination-button {

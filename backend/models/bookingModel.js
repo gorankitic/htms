@@ -17,6 +17,15 @@ const bookingSchema = mongoose.Schema({
         type: Number,
         required: [true, "Резервација мора имати дефинисан број гостију."],
     },
+    cabinPrice: {
+        type: Number,
+        required: [true, "Резервација мора имати дефинисану укупну цијену апартмана."]
+    },
+    breakfastPrice: {
+        type: Number,
+        required: [true, "Резервација мора имати дефинисану цијену доручка."],
+        default: 0
+    },
     totalPrice: {
         type: Number,
         requred: [true, "Резервација мора имати дефинисану коначну цијену."]
@@ -49,7 +58,7 @@ const bookingSchema = mongoose.Schema({
 
 // Pre-query mongoose hook to populate booking document with guest and cabin data
 bookingSchema.pre(/^find/, function (next) {
-    this.populate({ path: "guestId", select: "name email" })
+    this.populate({ path: "guestId", select: "name email nationalId" })
         .populate({ path: "cabinId", select: "name" })
     next();
 });

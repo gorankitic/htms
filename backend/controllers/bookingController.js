@@ -8,6 +8,51 @@ const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 
 
+// Create a booking
+// POST method
+// Protected route /api/bookings
+exports.createBooking = catchAsync(async (req, res, next) => {
+    const { startDate, endDate, numGuests, status, hasBreakfast, observations, guestId, cabinId } = req.body;
+
+    const settings = await Settings.find();
+
+    // CHECK NUMBER OF NIGHTS
+    // Convert the date strings to Date objects
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    // Calculate the difference in time (milliseconds)
+    const timeDifference = end - start;
+    // Convert the time difference from milliseconds to days
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    const numNights = timeDifference / millisecondsPerDay;
+
+    if (numNights > settings[0].bookingLength) {
+        return next(new AppError(`Дужина резервације не може бити дужа од ${settings[0].bookingLength} дана.`, 400));
+    }
+
+    const cabin = await Cabin.findById(cabinId);
+    if (!cabin) {
+        return next(new AppError("Тражени апартман не постоји.", 404));
+    }
+
+    // Check number of guests
+    if (numGuests > cabin.maxCapacity) {
+        return next(new AppError(`Максималан број гостију за овај апартман је ${cabin.maxCapacity}.`, 400));
+    }
+
+    // Calculate total price
+    const cabinPrice = (cabin.regularPrice - cabin.discount) * numNights;
+    let breakfastPrice = 0;
+    if (hasBreakfast) {
+        breakfastPrice = settings[0].breakfastPrice * numNights * numGuests;
+    }
+    const totalPrice = cabinPrice + breakfastPrice;
+
+    const booking = await Booking.create({ startDate, endDate, numNights, numGuests, status, hasBreakfast, cabinPrice, breakfastPrice, totalPrice, observations, guestId, cabinId });
+
+    res.status(201).json(booking);
+});
+
 // Find all bookings
 // GET method
 // Protected route /api/bookings
@@ -49,42 +94,18 @@ exports.getBookings = catchAsync(async (req, res) => {
     });
 });
 
-// Create a booking
-// POST method
-// Protected route /api/bookings
-exports.createBooking = catchAsync(async (req, res, next) => {
-    const { startDate, endDate, numGuests, status, hasBreakfast, observations, guestId, cabinId } = req.body;
+// Find booking by _id
+// GET method
+// Protected route /api/bookings/:bookingId
+exports.getBooking = catchAsync(async (req, res, next) => {
+    const booking = await Booking.findById(req.params.bookingId);
 
-    const settings = await Settings.find();
-
-    // CHECK NUMBER OF NIGHTS
-    // Convert the date strings to Date objects
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    // Calculate the difference in time (milliseconds)
-    const timeDifference = end - start;
-    // Convert the time difference from milliseconds to days
-    const millisecondsPerDay = 1000 * 60 * 60 * 24;
-    const numNights = timeDifference / millisecondsPerDay;
-
-    if (numNights > settings[0].bookingLength) {
-        return next(new AppError(`Дужина резервације не може бити дужа од ${settings[0].bookingLength} дана.`, 400));
+    if (!booking) {
+        return next(new AppError("Резервација са тим бројем не постоји!", 404));
     }
 
-    const cabin = await Cabin.findById(cabinId);
-
-    // Check number of guests
-    if (numGuests > cabin.maxCapacity) {
-        return next(new AppError(`Максималан број гостију за овај апартман је ${cabin.maxCapacity}.`, 400));
-    }
-
-    // Calculate total price
-    let totalPrice = (cabin.regularPrice - cabin.discount) * numNights;
-    if (hasBreakfast) {
-        totalPrice += settings[0].breakfastPrice * numNights * numGuests;
-    }
-
-    const booking = await Booking.create({ startDate, endDate, numNights, numGuests, status, hasBreakfast, totalPrice, observations, guestId, cabinId });
-
-    res.status(201).json(booking);
+    res.status(200).json({
+        status: "success",
+        booking
+    });
 });
