@@ -109,3 +109,32 @@ exports.getBooking = catchAsync(async (req, res, next) => {
         booking
     });
 });
+
+// Update booking
+// PATCH method
+// Protected route /api/bookings/:bookingId
+exports.updateBooking = catchAsync(async (req, res, next) => {
+    const settings = await Settings.find();
+    const booking = await Booking.findById(req.params.bookingId);
+
+    if (!booking) {
+        return next(new AppError("Резервација са тим бројем не постоји!", 404));
+    }
+
+    let totalPrice = booking.totalPrice;
+    let breakfastPrice = booking.breakfastPrice;
+    let hasBreakfast = booking.hasBreakfast;
+    if (req.body.hasBreakfast) {
+        breakfastPrice = settings[0].breakfastPrice * booking.numNights * booking.numGuests;
+        totalPrice += breakfastPrice;
+        hasBreakfast = req.body.hasBreakfast;
+    }
+
+    const updatedBooking = await Booking.findByIdAndUpdate(
+        req.params.bookingId,
+        { status: req.body.status, isPaid: req.body.isPaid, totalPrice, breakfastPrice, hasBreakfast },
+        { new: true, runValidators: true }
+    );
+
+    res.status(200).json(updatedBooking);
+});

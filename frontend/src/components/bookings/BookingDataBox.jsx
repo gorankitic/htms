@@ -9,9 +9,6 @@ import { twMerge } from "tailwind-merge";
 import { HiOutlineChatBubbleBottomCenterText, HiOutlineCheckCircle, HiOutlineHomeModern } from "react-icons/hi2";
 
 const BookingDataBox = ({ booking }) => {
-
-    console.log(booking)
-
     const { createdAt, startDate, endDate, numNights, numGuests, hasBreakfast, observations, isPaid, breakfastPrice, cabinPrice, totalPrice, guestId: { name: guestName, email, nationalId }, cabinId: { name: cabinName } } = booking;
 
     return (

@@ -30,3 +30,19 @@ export const getBooking = async (bookingId) => {
 
     return json;
 }
+
+export const updateBooking = async (bookingId, data) => {
+    const response = await fetch(`http://localhost:3000/api/bookings/${bookingId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ ...data })
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+
+    return json;
+}

@@ -46,9 +46,13 @@ label {
 }
 
 .tag {
-    @apply w-32 h-fit mx-auto uppercase py-1 px-2 rounded-xl text-sm text-center;
+    @apply w-32 h-fit uppercase py-1 px-2 rounded-xl text-sm text-center;
 }
 
 .pagination-button {
     @apply flex items-center gap-[2px] justify-center p-1 rounded-sm transition-all hover:bg-teal-600 hover:text-teal-50 disabled:bg-gray-200 disabled:text-gray-400;
+}
+
+.border-btn {
+    @apply bg-none border border-teal-600 text-teal-600 rounded-sm py-2 px-4 transition-all hover:text-teal-500;
 }

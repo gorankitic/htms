@@ -1,5 +1,5 @@
 const express = require("express");
-const { getBookings, createBooking, getBooking } = require("../controllers/bookingController");
+const { getBookings, createBooking, getBooking, updateBooking } = require("../controllers/bookingController");
 
 const router = express.Router();
 
@@ -9,5 +9,6 @@ router.route("/")
 
 router.route("/:bookingId")
     .get(getBooking)
+    .patch(updateBooking)
 
 module.exports = router;

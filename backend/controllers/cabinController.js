@@ -45,6 +45,10 @@ exports.updateCabin = catchAsync(async (req, res) => {
         { new: true, runValidators: true }
     );
 
+    if (!updatedCabin) {
+        return next(new AppError("There is no cabin with that id.", 404));
+    }
+
     res.status(200).json(updatedCabin);
 });
 
