@@ -82,6 +82,7 @@ const Checkin = () => {
                 <button
                     className="btn-primary"
                     onClick={handleCheckin}
+                    disabled={!confirmPaid}
                 >
                     {`Пријави госта ${guestName}`}
                 </button>

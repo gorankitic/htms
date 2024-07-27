@@ -1,5 +1,6 @@
 // hooks
 import { useNavigate } from "react-router-dom";
+import { useCheckout } from "../../hooks/checkin/useCheckout";
 // components
 import Table from "../Table";
 import Menu from "../Menu";
@@ -8,10 +9,11 @@ import StatusTag from "../StatusTag";
 import { format, isToday } from "date-fns";
 import { formatDistanceFromNow } from "../../utils/utils";
 // assets
-import { HiOutlineCalendarDays, HiOutlineShieldCheck } from "react-icons/hi2";
+import { HiOutlineCalendarDays, HiOutlineShieldCheck, HiMiniArrowLeftStartOnRectangle } from "react-icons/hi2";
 
 const BookingRow = ({ booking }) => {
-    const { _id, startDate, endDate, numNights, totalPrice, status, guestId: { name: guestName, email }, cabinId: { name: cabinName } } = booking;
+    const { _id: bookingId, startDate, endDate, numNights, totalPrice, status, guestId: { name: guestName, email }, cabinId: { name: cabinName } } = booking;
+    const { checkout, isCheckingOut } = useCheckout();
     const navigate = useNavigate();
 
     return (
@@ -34,20 +36,29 @@ const BookingRow = ({ booking }) => {
             </div>
             <div>{totalPrice} КМ</div>
             <Menu>
-                <Menu.Toggle id={_id} />
-                <Menu.List id={_id}>
+                <Menu.Toggle id={bookingId} />
+                <Menu.List id={bookingId}>
                     <Menu.Button
                         icon={<HiOutlineCalendarDays className="h-5 w-5" />}
-                        onClick={() => navigate(`/bookings/${_id}`)}
+                        onClick={() => navigate(`/bookings/${bookingId}`)}
                     >
                         Детаљи
                     </Menu.Button>
                     {status === "непотврђен" && (
                         <Menu.Button
                             icon={<HiOutlineShieldCheck className="h-5 w-5" />}
-                            onClick={() => navigate(`/checkin/${_id}`)}
+                            onClick={() => navigate(`/checkin/${bookingId}`)}
                         >
                             Пријава
+                        </Menu.Button>
+                    )}
+                    {status === "пријављен" && (
+                        <Menu.Button
+                            icon={<HiMiniArrowLeftStartOnRectangle className="h-5 w-5" />}
+                            onClick={() => checkout({ bookingId })}
+                            disabled={isCheckingOut}
+                        >
+                            Одјави
                         </Menu.Button>
                     )}
                 </Menu.List>

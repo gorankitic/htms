@@ -121,6 +121,13 @@ exports.updateBooking = catchAsync(async (req, res, next) => {
         return next(new AppError("Резервација са тим бројем не постоји!", 404));
     }
 
+    let isPaid;
+    if (!req.body.isPaid) {
+        isPaid = booking.isPaid;
+    } else {
+        isPaid = req.body.isPaid;
+    }
+
     let totalPrice = booking.totalPrice;
     let breakfastPrice = booking.breakfastPrice;
     let hasBreakfast = booking.hasBreakfast;
@@ -132,7 +139,7 @@ exports.updateBooking = catchAsync(async (req, res, next) => {
 
     const updatedBooking = await Booking.findByIdAndUpdate(
         req.params.bookingId,
-        { status: req.body.status, isPaid: req.body.isPaid, totalPrice, breakfastPrice, hasBreakfast },
+        { status: req.body.status, isPaid, totalPrice, breakfastPrice, hasBreakfast },
         { new: true, runValidators: true }
     );
 

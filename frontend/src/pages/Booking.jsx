@@ -1,7 +1,8 @@
 // hooks
-import { useBooking } from "../hooks/bookings/useBooking";
-import { useMoveBack } from "../hooks/useMoveBack";
 import { useNavigate } from "react-router-dom";
+import { useBooking } from "../hooks/bookings/useBooking";
+import { useCheckout } from "../hooks/checkin/useCheckout";
+import { useMoveBack } from "../hooks/useMoveBack";
 // components
 import Spinner from "../components/Spinner";
 import StatusTag from "../components/StatusTag";
@@ -9,6 +10,7 @@ import BookingDataBox from "../components/bookings/BookingDataBox";
 
 const Booking = () => {
     const { data, isLoading } = useBooking();
+    const { checkout, isCheckingOut } = useCheckout();
     const moveBack = useMoveBack();
     const navigate = useNavigate();
 
@@ -20,7 +22,7 @@ const Booking = () => {
         );
     }
 
-    const { _id, status, guestId: { name } } = data?.booking;
+    const { _id: bookingId, status, guestId: { name } } = data?.booking;
 
     return (
         <div className="max-w-screen-xl flex flex-col mx-auto mt-6 px-6">
@@ -41,9 +43,18 @@ const Booking = () => {
                 {status === "непотврђен" && (
                     <button
                         className="btn-primary"
-                        onClick={() => navigate(`/checkin/${_id}`)}
+                        onClick={() => navigate(`/checkin/${bookingId}`)}
                     >
                         Пријава
+                    </button>
+                )}
+                {status === "пријављен" && (
+                    <button
+                        className="btn-primary"
+                        onClick={() => checkout({ bookingId })}
+                        disabled={isCheckingOut}
+                    >
+                        Одјави
                     </button>
                 )}
             </section>
