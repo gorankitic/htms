@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useBooking } from "../hooks/bookings/useBooking";
 import { useCheckout } from "../hooks/checkin/useCheckout";
 import { useMoveBack } from "../hooks/useMoveBack";
+import { useDeleteBooking } from "../hooks/bookings/useDeleteBooking";
 // components
+import Modal from "../components/Modal";
+import ConfirmDelete from "../components/ConfirmDelete";
 import Spinner from "../components/Spinner";
 import StatusTag from "../components/StatusTag";
 import BookingDataBox from "../components/bookings/BookingDataBox";
@@ -11,6 +14,7 @@ import BookingDataBox from "../components/bookings/BookingDataBox";
 const Booking = () => {
     const { data, isLoading } = useBooking();
     const { checkout, isCheckingOut } = useCheckout();
+    const { deleteBooking, isDeleting } = useDeleteBooking();
     const moveBack = useMoveBack();
     const navigate = useNavigate();
 
@@ -40,6 +44,24 @@ const Booking = () => {
                 >
                     &larr; Назад
                 </button>
+                <Modal>
+                    <Modal.Open opens="delete">
+                        <button
+                            className="btn-primary"
+                        >
+                            Обриши
+                        </button>
+                    </Modal.Open>
+                    <Modal.Window name="delete">
+                        <ConfirmDelete
+                            resourceName="резервацију"
+                            disabled={isDeleting}
+                            onConfirm={() => deleteBooking(bookingId, {
+                                onSettled: () => navigate(-1)
+                            })}
+                        />
+                    </Modal.Window>
+                </Modal>
                 {status === "непотврђен" && (
                     <button
                         className="btn-primary"

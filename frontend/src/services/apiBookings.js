@@ -46,3 +46,18 @@ export const updateBooking = async (bookingId, data) => {
 
     return json;
 }
+
+export const deleteBooking = async (bookingId) => {
+    const response = await fetch(`http://localhost:3000/api/bookings/${bookingId}`, {
+        method: "DELETE",
+        headers: { 'Content-Type': 'application/json' },
+        credentials: "include"
+    });
+
+    if (!response.ok) {
+        const json = await response.json();
+        throw new Error(json.message);
+    }
+
+    return response;
+}

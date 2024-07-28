@@ -4,10 +4,17 @@ import { useSearchParams } from "react-router-dom";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 // libs
 import { PAGE_SIZE } from "../utils/constants";
+import { useEffect } from "react";
 
-const Pagination = ({ count, numPages }) => {
+const Pagination = ({ count, numPages, numElementsPerPage }) => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const currentPage = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+    let currentPage = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+
+    useEffect(() => {
+        if (numElementsPerPage === 0) {
+            previousPage()
+        }
+    }, [numElementsPerPage]);
 
     const nextPage = () => {
         const next = currentPage === numPages ? currentPage : currentPage + 1;

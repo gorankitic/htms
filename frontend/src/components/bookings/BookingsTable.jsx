@@ -34,7 +34,7 @@ const BookingsTable = () => {
                     render={(booking) => <BookingRow key={booking._id} booking={booking} />}
                 />
                 <Table.Footer>
-                    <Pagination count={data.totalDocs} numPages={data.totalPages} />
+                    <Pagination count={data.totalDocs} numPages={data.totalPages} numBookingsPerPage={data.bookings.length} />
                 </Table.Footer>
             </Table>
         </Menu>

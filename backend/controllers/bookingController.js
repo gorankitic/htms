@@ -145,3 +145,18 @@ exports.updateBooking = catchAsync(async (req, res, next) => {
 
     res.status(200).json(updatedBooking);
 });
+
+// Delete booking
+// DELETE method
+// Protected route /api/bookings/:bookingId
+exports.deleteBooking = catchAsync(async (req, res, next) => {
+    const booking = await Booking.findByIdAndDelete(req.params.bookingId);
+
+    if (!booking) {
+        return next(new AppError("Не постоји резервација са тим бројем.", 404));
+    }
+
+    res.status(204).json({
+        status: "success"
+    });
+});
