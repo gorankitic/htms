@@ -1,3 +1,28 @@
+const AppError = require("../utils/AppError");
+
+// Handling mongoose validation errors
+const handleValidationErrorDB = error => {
+    const errors = Object.values(error.errors).map(el => el.message);
+    const message = `${errors.join(" ")}`;
+    return new AppError(message, 400);
+}
+
+// Handling invalid database IDs
+const handleCastErrorDB = err => {
+    const message = `Invalid ${err.path}: ${err.value}`;
+    return new AppError(message, 400);
+}
+
+// Handling duplicate database field
+const handleDuplicateFieldDB = err => {
+    const value = Object.values(err.keyValue)[0];
+    const message = `${value} already exists.`;
+    return new AppError(message, 400);
+}
+
+// Handling invalid JWT error
+const handleJWTError = () => new AppError('Неважећи токен, пријавите се поново.', 401);
+
 
 // Send more error details in development mode
 const sendErrorDev = (err, res) => {
@@ -40,6 +65,11 @@ module.exports = (err, req, res, next) => {
         sendErrorDev(err, res);
     } else if (process.env.NODE_ENV === "production") {
         let error = Object.assign(err);
+
+        if (error.name === "ValidationError") error = handleValidationErrorDB(error);
+        if (error.code === 11000) error = handleDuplicateFieldDB(error);
+        if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
+        if (error.name === 'JsonWebTokenError') error = handleJWTError();
 
         sendErrorProd(error, res);
     }

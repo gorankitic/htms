@@ -2,10 +2,12 @@ const express = require("express");
 const colors = require("colors/safe");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const AppError = require("./utils/AppError");
 const globalErrorHandler = require("./controllers/errorController");
 
+const userRouter = require("./routes/userRoutes");
 const cabinRouter = require("./routes/cabinRoutes");
 const settingsRouter = require("./routes/settingsRoutes");
 const bookingRouter = require("./routes/bookingRoutes");
@@ -18,9 +20,11 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 // (Routers)
+app.use("/api/users", userRouter);
 app.use("/api/cabins", cabinRouter);
 app.use("/api/settings", settingsRouter);
 app.use("/api/bookings", bookingRouter);
