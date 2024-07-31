@@ -29,6 +29,10 @@ label {
     @apply bg-white text-accent-600 py-2 px-4 border rounded-sm;
 }
 
+.btn-teal {
+    @apply bg-teal-600 text-teal-50 py-2 px-4 rounded-sm hover:bg-teal-500 flex items-center gap-2;
+}
+
 .active-navlink {
     @apply py-2 rounded-md w-full bg-slate-200 flex items-center justify-center gap-2 text-teal-600
 }
@@ -55,4 +59,24 @@ label {
 
 .border-btn {
     @apply bg-none border border-teal-600 text-teal-600 rounded-sm py-2 px-4 transition-all hover:text-teal-500;
+}
+
+.form-input {
+    @apply w-full focus:outline-teal-600 focus:outline-1 focus:outline-offset-2 rounded py-[6px] pl-11;
+}
+
+.input-icon {
+    @apply absolute left-4 top-2 h-5 w-5;
+}
+
+.input-icon-right {
+    @apply absolute h-5 top-2 left-auto right-4 cursor-pointer;
+}
+
+.button-icon {
+    @apply h-4 w-4 text-teal-50 cursor-pointer;
+}
+
+.form-error {
+    @apply text-red-600 mt-1;
 }

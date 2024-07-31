@@ -1,8 +1,10 @@
 
 // components
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AppLayout from "./components/AppLayout";
 import { Toaster } from "react-hot-toast";
+// context
+import { useAuthContext } from "./context/AuthContext.jsx";
 // pages
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
@@ -13,40 +15,30 @@ import Users from "./pages/Users";
 import Settings from "./pages/Settings";
 import Account from "./pages/Account";
 import Login from "./pages/Login";
-// react-query
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            staleTime: 60 * 1000,
-        }
-    }
-});
 
 const App = () => {
+    const { user } = useAuthContext();
+
     return (
-        <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen={false} />
+        <>
             <BrowserRouter>
                 <Routes>
                     <Route element={<AppLayout />}>
                         <Route index element={<Dashboard />} />
-                        <Route path="dashboard" element={<Dashboard />} />
-                        <Route path="bookings" element={<Bookings />} />
-                        <Route path="bookings/:bookingId" element={<Booking />} />
-                        <Route path="cabins" element={<Cabins />} />
-                        <Route path="checkin/:bookingId" element={<Checkin />} />
-                        <Route path="users" element={<Users />} />
-                        <Route path="settings" element={<Settings />} />
-                        <Route path="account" element={<Account />} />
+                        <Route path="dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
+                        <Route path="bookings" element={user ? <Bookings /> : <Navigate to="/login" />} />
+                        <Route path="bookings/:bookingId" element={user ? <Booking /> : <Navigate to="/login" />} />
+                        <Route path="cabins" element={user ? <Cabins /> : <Navigate to="/login" />} />
+                        <Route path="checkin/:bookingId" element={user ? <Checkin /> : <Navigate to="/login" />} />
+                        <Route path="users" element={user ? <Users /> : <Navigate to="/login" />} />
+                        <Route path="settings" element={user ? <Settings /> : <Navigate to="/login" />} />
+                        <Route path="account" element={user ? < Account /> : <Navigate to="/login" />} />
                     </Route>
-                    <Route path="login" element={<Login />} />
+                    <Route path="login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
                 </Routes>
             </BrowserRouter>
             <Toaster position="top-right" />
-        </QueryClientProvider>
+        </>
     )
 }
 

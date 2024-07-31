@@ -1,17 +1,14 @@
 
 // components
 import { NavLink } from "react-router-dom";
+import Logo from "./Logo";
 // assets
-import Logo from "../assets/logo.png";
 import { HiOutlineHome, HiOutlineCalendarDays, HiOutlineHomeModern, HiOutlineUsers, HiOutlineCog8Tooth } from "react-icons/hi2";
 
 const Sidebar = () => {
     return (
         <aside className='py-4 border-r-2 border-gray-200 min-w-80'>
-            <div className="flex flex-col items-center mt-6">
-                <img src={Logo} className="w-[90px] h-[90px] mb-1" />
-                <p className="text-xl font-medium uppercase tracking-wider">Хотел Тајан</p>
-            </div>
+            <Logo />
             <nav className="my-6 mx-8">
                 <ul className="space-y-1 py-2 tracking-wider font-medium text-sm">
                     <li className="w-full">

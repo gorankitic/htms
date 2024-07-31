@@ -1,9 +1,11 @@
-import React from 'react'
+// components
+import Logout from './Logout'
 
 const Header = () => {
     return (
-        <header className='py-4 px-4 border-b-2 border-gray-200'>
-            Header
+        <header className='flex justify-between py-4 px-4 border-b-2 border-gray-200'>
+            <p>Header</p>
+            <Logout />
         </header>
     )
 }
