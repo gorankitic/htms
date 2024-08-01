@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const Account = () => {
     return (
@@ -6,4 +6,4 @@ const Account = () => {
     )
 }
 
-export default Account
+export default Account;

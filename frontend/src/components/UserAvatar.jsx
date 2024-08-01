@@ -11,7 +11,7 @@ const UserAvatar = () => {
                 alt={`${user?.name} avatar`}
                 className="block w-7 h-7 rounded-full aspect-square object-cover object-center outline-1 outline-gray-500"
             />
-            <span>{user?.name}</span>
+            <span className="font-medium text-lg">{user?.name}</span>
         </div>
     )
 }
