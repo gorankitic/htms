@@ -1,9 +1,10 @@
-import React from 'react'
+// components
+import SignupForm from "../components/SignupForm";
 
 const Users = () => {
     return (
-        <div>Users</div>
+        <SignupForm />
     )
 }
 
-export default Users
+export default Users;

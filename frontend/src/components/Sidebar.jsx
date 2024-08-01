@@ -1,4 +1,5 @@
-
+// hooks
+import { useAuthContext } from "../context/AuthContext";
 // components
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
@@ -6,6 +7,8 @@ import Logo from "./Logo";
 import { HiOutlineHome, HiOutlineCalendarDays, HiOutlineHomeModern, HiOutlineUsers, HiOutlineCog8Tooth } from "react-icons/hi2";
 
 const Sidebar = () => {
+    const { user } = useAuthContext();
+
     return (
         <aside className='py-4 border-r-2 border-gray-200 min-w-80'>
             <Logo />
@@ -38,15 +41,17 @@ const Sidebar = () => {
                             <span>Апартмани</span>
                         </NavLink>
                     </li>
-                    <li className="w-full">
-                        <NavLink
-                            to="/users"
-                            className={({ isActive }) => isActive ? "active-navlink" : "navlink"}
-                        >
-                            <HiOutlineUsers className="navlink-icon" />
-                            <span>Корисници</span>
-                        </NavLink>
-                    </li>
+                    {(user && user.role === "admin") && (
+                        <li className="w-full">
+                            <NavLink
+                                to="/users"
+                                className={({ isActive }) => isActive ? "active-navlink" : "navlink"}
+                            >
+                                <HiOutlineUsers className="navlink-icon" />
+                                <span>Корисници</span>
+                            </NavLink>
+                        </li>
+                    )}
                     <li className="w-full">
                         <NavLink
                             to="/settings"

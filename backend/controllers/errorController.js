@@ -16,7 +16,7 @@ const handleCastErrorDB = err => {
 // Handling duplicate database field
 const handleDuplicateFieldDB = err => {
     const value = Object.values(err.keyValue)[0];
-    const message = `${value} already exists.`;
+    const message = `${value} већ постоји регистрован.`;
     return new AppError(message, 400);
 }
 
@@ -66,9 +66,11 @@ module.exports = (err, req, res, next) => {
     } else if (process.env.NODE_ENV === "production") {
         let error = Object.assign(err);
 
+        console.log(error)
+
         if (error.name === "ValidationError") error = handleValidationErrorDB(error);
         if (error.code === 11000) error = handleDuplicateFieldDB(error);
-        if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
+        if (error.name === 'CastError') error = handleCastErrorDB(error);
         if (error.name === 'JsonWebTokenError') error = handleJWTError();
 
         sendErrorProd(error, res);

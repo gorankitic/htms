@@ -33,10 +33,16 @@ const createSendToken = (user, statusCode, res) => {
 // Protected and restricted route /api/users/signup
 exports.signup = catchAsync(async (req, res, next) => {
     const { name, email, password } = req.body;
-    // Create a new user (by default employee) - user is hashed in pre save mongoose hook in User model
+    // Create a new user (by default employee) - user password is hashed in pre save mongoose hook in User model
     const user = await User.create({ name, email, password });
-    // Create JWT and send it in cookie and send response
-    createSendToken(user, 201, res);
+    // Send response
+    res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        photoUrl: user.photoUrl
+    });
 });
 
 // Log in user
