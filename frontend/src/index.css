@@ -30,7 +30,7 @@ label {
 }
 
 .btn-teal {
-    @apply bg-teal-600 text-teal-50 py-2 px-4 rounded-sm hover:bg-teal-500 flex items-center gap-2;
+    @apply bg-teal-600 text-teal-50 py-2 px-4 rounded-sm hover:bg-teal-500 flex items-center justify-center gap-2;
 }
 
 .active-navlink {

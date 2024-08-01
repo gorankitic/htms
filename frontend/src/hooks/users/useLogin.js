@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { login as loginApi } from "../../services/apiAuth";
 
 export const useLogin = () => {
-    const { mutate: login, isLoading: isLoggingIn } = useMutation({
+    const { mutate: login, isPending: isLoggingIn } = useMutation({
         mutationFn: ({ email, password }) => loginApi({ email, password }),
     });
 

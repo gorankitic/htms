@@ -4,21 +4,15 @@ import { createContext, useEffect, useReducer, useContext } from "react";
 const AuthContext = createContext();
 
 const initialState = {
-    user: null,
-    isLoading: false,
-    error: null
+    user: null
 }
 
 const authReducer = (state, action) => {
     switch (action.type) {
-        case "loading":
-            return { ...state, isLoading: true }
         case "login":
-            return { user: action.payload, isLoading: false, error: null }
+            return { user: action.payload }
         case "logout":
-            return { user: null, isLoading: false, error: null }
-        case "rejected":
-            return { ...state, isLoading: false, error: action.payload }
+            return { user: null }
         default: {
             return state;
         }

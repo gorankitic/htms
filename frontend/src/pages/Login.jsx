@@ -1,17 +1,17 @@
 // hooks
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useLogin } from "../hooks/users/useLogin";
 import { useAuthContext } from "../context/AuthContext";
 // client-side validation with Yup
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 // components
 import Logo from "../components/Logo";
-import Spinner from "../components/Spinner";
+import SpinnerButton from "../components/SpinnerButton";
 // assets
 import { Mail, KeyRound, Send, Eye, EyeOff } from 'lucide-react';
-import { useForm } from "react-hook-form";
-import { useLogin } from "../hooks/users/useLogin";
 
 // Login validation schema
 const SignInSchema = yup.object({
@@ -24,7 +24,9 @@ const Login = () => {
     const navigate = useNavigate();
     const { login, isLoggingIn } = useLogin();
     const { dispatch } = useAuthContext();
-    const { register, handleSubmit, formState: { errors }, setError } = useForm({ resolver: yupResolver(SignInSchema) });
+    const { register, handleSubmit, formState: { isSubmitting, errors }, setError } = useForm({ resolver: yupResolver(SignInSchema) });
+
+    console.log(isLoggingIn)
 
     const onSubmit = async (data) => {
         // React Query provides its own error handling through the onError callback of the mutate function. 
@@ -85,10 +87,10 @@ const Login = () => {
                 {errors.root?.type === "server" && <p className="form-error">{errors.root.message}</p>}
             </div>
             <button
-                className="btn-teal"
+                className="btn-teal w-40 h-10"
                 disabled={isLoggingIn}
             >
-                {isLoggingIn ? <Spinner color="text-teal-50" /> : "Пријави се"}
+                {isLoggingIn ? <SpinnerButton /> : "Пријави се"}
                 <Send className="button-icon" />
             </button>
         </form>
