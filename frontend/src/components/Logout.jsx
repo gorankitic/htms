@@ -10,8 +10,9 @@ const Logout = () => {
         <button
             onClick={logout}
             disabled={isLoading}
+            className='p-2 rounded-md hover:bg-gray-100'
         >
-            <LogOut />
+            <LogOut className="h-6 w-6" />
         </button>
     )
 }
