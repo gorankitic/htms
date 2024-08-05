@@ -80,3 +80,7 @@ label {
 .form-error {
     @apply text-red-600 mt-1;
 }
+
+.profile-img {
+    @apply rounded-full border-4 mx-auto h-[200px] w-[200px] object-cover flex items-center justify-center;
+}

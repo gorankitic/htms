@@ -95,7 +95,7 @@ const SignupForm = () => {
                 {errors.root?.type === "server" && <p className="form-error">{errors.root.message}</p>}
             </div>
             <button
-                className="btn-teal w-50 h-10"
+                className="btn-teal w-52 h-10"
                 disabled={isPending}
             >
                 {isPending ? <SpinnerButton /> : "Направи профил"}

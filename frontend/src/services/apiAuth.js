@@ -47,3 +47,20 @@ export const signup = async ({ name, email, password }) => {
 
     return json;
 }
+
+export const updateUser = async ({ name, photoUrl, userId }) => {
+    const response = await fetch(`http://localhost:3000/api/users/${userId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ name, photoUrl })
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+
+    return json;
+}
