@@ -7,7 +7,6 @@ const Settings = require("../models/settingsModel");
 const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 
-
 // Create a booking
 // POST method
 // Protected route /api/bookings
@@ -158,5 +157,43 @@ exports.deleteBooking = catchAsync(async (req, res, next) => {
 
     res.status(204).json({
         status: "success"
+    });
+});
+
+// Get latest bookings based on a specified number of days
+// GET method
+// Protected route /api/bookings/latest/:period
+exports.getLatestBookings = catchAsync(async (req, res, next) => {
+
+    const days = parseInt(req.params.period) || 7;
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(endDate.getDate() - days);
+
+    const latestBookings = await Booking.find({ createdAt: { $gte: startDate, $lte: endDate } });
+
+    res.status(200).json({
+        status: "success",
+        results: latestBookings.length,
+        latestBookings
+    });
+});
+
+// Get latest stays based on a specified number of days 
+// GET method
+// Protected route /api/bookings/stays/:period
+exports.getLatestStays = catchAsync(async (req, res, next) => {
+
+    const days = parseInt(req.params.period) || 7;
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(endDate.getDate() - days);
+
+    const latestStays = await Booking.find({ startDate: { $gte: startDate, $lte: endDate } });
+
+    res.status(200).json({
+        status: "success",
+        results: latestStays.length,
+        latestStays
     });
 });

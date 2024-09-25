@@ -84,3 +84,7 @@ label {
 .profile-img {
     @apply rounded-full border-4 mx-auto h-[200px] w-[200px] object-cover flex items-center justify-center;
 }
+
+.stat-icon {
+    @apply h-12 w-12 rounded-full p-2;
+}

@@ -1,7 +1,7 @@
 // hooks
 import { useSearchParams } from "react-router-dom";
 // react-query
-import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 // services
 import { getBookings } from "../../services/apiBookings";
 // libs

@@ -61,3 +61,25 @@ export const deleteBooking = async (bookingId) => {
 
     return response;
 }
+
+export const getLatestBookings = async (period) => {
+    const response = await fetch(`http://localhost:3000/api/bookings/latest/${period}`, { credentials: "include" });
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+
+    return json;
+}
+
+export const getLatestStays = async (period) => {
+    const response = await fetch(`http://localhost:3000/api/bookings/stays/${period}`, { credentials: "include" });
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+
+    return json;
+}
