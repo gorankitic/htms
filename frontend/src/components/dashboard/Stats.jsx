@@ -11,7 +11,7 @@ const Stats = ({ bookings, confirmedStays, numCabins, period }) => {
     const occupation = confirmedStays.reduce((acc, stay) => acc + stay.numNights, 0) / (period * numCabins);
 
     return (
-        <>
+        <div className="flex justify-between px-2 mb-8">
             <StatBox
                 title="Резервације: "
                 icon={<HiOutlineCalendarDays className="stat-icon stroke-indigo-600" />}
@@ -32,7 +32,7 @@ const Stats = ({ bookings, confirmedStays, numCabins, period }) => {
                 icon={<HiOutlineChartPie className="stat-icon stroke-amber-400" />}
                 value={Math.round(occupation * 100) + "%"}
             />
-        </>
+        </div>
     )
 }
 

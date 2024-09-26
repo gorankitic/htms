@@ -86,5 +86,5 @@ label {
 }
 
 .stat-icon {
-    @apply h-12 w-12 rounded-full p-2;
+    @apply h-8 w-8 rounded-full;
 }

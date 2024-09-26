@@ -1,14 +1,16 @@
 // hooks
+import { useCabins } from "../../hooks/cabins/useCabins";
 import { useLatestBookings } from "../../hooks/bookings/useLatestBookings";
 import { useLatestStays } from "../../hooks/bookings/useLatestStays";
-import { useCabins } from "../../hooks/cabins/useCabins";
 // components
 import Spinner from "../Spinner";
+import SalesChart from "./SalesChart";
 import Stats from "./Stats";
+import DurationChart from "./DurationChart";
 
 const DashboardLayout = () => {
     const { isLoading: isLoadingBookings, latestBookings } = useLatestBookings();
-    const { latestStays, confirmedStays, isLoading: isLoadingStays, period } = useLatestStays();
+    const { confirmedStays, isLoading: isLoadingStays, period } = useLatestStays();
     const { data, isLoading: isLoadingCabins } = useCabins();
 
     if (isLoadingBookings || isLoadingStays || isLoadingCabins) {
@@ -20,12 +22,12 @@ const DashboardLayout = () => {
     }
 
     return (
-        <div className="grid grid-cols-4 grid-rows-3 gap-2">
+        <div className="flex flex-col">
             <Stats bookings={latestBookings} confirmedStays={confirmedStays} period={period} numCabins={data.results} />
-            <div>Статистика</div>
-            <div>Данашња активност</div>
-            <div>Дужина боравка</div>
-            <div>Продаја</div>
+            <div className="flex justify-between">
+                <DurationChart />
+            </div>
+            <SalesChart confirmedStays={confirmedStays} period={period} />
         </div>
     )
 }
