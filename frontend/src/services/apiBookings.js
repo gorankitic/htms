@@ -83,3 +83,16 @@ export const getLatestStays = async (period) => {
 
     return json;
 }
+
+export const getTodayActivity = async () => {
+    const response = await fetch(`http://localhost:3000/api/bookings/activity`, { credentials: "include" });
+    const json = await response.json();
+
+    console.log(json)
+
+    if (!response.ok) {
+        throw new Error(json.message);
+    }
+
+    return json;
+}

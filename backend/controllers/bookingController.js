@@ -49,6 +49,8 @@ exports.createBooking = catchAsync(async (req, res, next) => {
 
     const booking = await Booking.create({ startDate, endDate, numNights, numGuests, status, hasBreakfast, cabinPrice, breakfastPrice, totalPrice, observations, guestId, cabinId });
 
+    console.log(booking)
+
     res.status(201).json(booking);
 });
 
@@ -196,4 +198,24 @@ exports.getLatestStays = catchAsync(async (req, res, next) => {
         results: latestStays.length,
         latestStays
     });
+});
+
+
+// Get todays bookings for arriving and leaving guests
+// GET method
+// Protected route /api/bookings/activity
+exports.getTodayStaysActivity = catchAsync(async (req, res, next) => {
+
+    const now = new Date();
+    const startOfDay = new Date(now.setHours(0, 0, 0, 0)).toISOString();
+    const endOfDay = new Date(now.setHours(23, 59, 59, 999)).toISOString();
+
+    const todayActivities = await Booking.find({
+        $or: [
+            { startDate: { $gte: startOfDay, $lt: endOfDay }, status: "непотврђен" },
+            { endDate: { $gte: startOfDay, $lt: endOfDay }, status: "пријављен" }
+        ]
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json(todayActivities)
 });

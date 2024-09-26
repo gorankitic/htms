@@ -59,7 +59,7 @@ const DurationChart = ({ confirmedStays }) => {
     const data = prepareData(chartOptions, confirmedStays);
 
     return (
-        <div className="w-1/2">
+        <div className="w-1/2 bg-gray-50 border border-gray-200 py-4">
             <p className="font-medium uppercase text-center">Дужина боравка по ноћима</p>
             <ResponsiveContainer width="100%" height={250}>
                 <PieChart>

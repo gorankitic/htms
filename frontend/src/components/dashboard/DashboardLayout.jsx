@@ -4,9 +4,10 @@ import { useLatestBookings } from "../../hooks/bookings/useLatestBookings";
 import { useLatestStays } from "../../hooks/bookings/useLatestStays";
 // components
 import Spinner from "../Spinner";
-import SalesChart from "./SalesChart";
 import Stats from "./Stats";
+import TodayActivity from "./TodayActivity";
 import DurationChart from "./DurationChart";
+import SalesChart from "./SalesChart";
 
 const DashboardLayout = () => {
     const { isLoading: isLoadingBookings, latestBookings } = useLatestBookings();
@@ -24,7 +25,8 @@ const DashboardLayout = () => {
     return (
         <div className="flex flex-col">
             <Stats bookings={latestBookings} confirmedStays={confirmedStays} period={period} numCabins={data.results} />
-            <div className="flex justify-between mb-8">
+            <div className="flex justify-between mb-8 gap-10">
+                <TodayActivity />
                 <DurationChart confirmedStays={confirmedStays} />
             </div>
             <SalesChart confirmedStays={confirmedStays} period={period} />

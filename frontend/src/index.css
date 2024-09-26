@@ -4,6 +4,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+}
+
 .my-config {
     --uc-primary-oklch-dark: 69% 0.1768 258.4;
     --uc-primary-oklch-light: 59% 0.22 264;
