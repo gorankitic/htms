@@ -24,8 +24,8 @@ const DashboardLayout = () => {
     return (
         <div className="flex flex-col">
             <Stats bookings={latestBookings} confirmedStays={confirmedStays} period={period} numCabins={data.results} />
-            <div className="flex justify-between">
-                <DurationChart />
+            <div className="flex justify-between mb-8">
+                <DurationChart confirmedStays={confirmedStays} />
             </div>
             <SalesChart confirmedStays={confirmedStays} period={period} />
         </div>
