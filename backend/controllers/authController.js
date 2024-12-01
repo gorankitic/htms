@@ -50,6 +50,10 @@ exports.signup = catchAsync(async (req, res, next) => {
 // Public route /api/users/login
 exports.login = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
+    // Check if email and password exists
+    if (!email || !password) {
+        return next(new AppError("Please provide email and password.", 400));
+    }
     // Check if user with this email exist and is password correct?
     const user = await User.findOne({ email }).select("+password");
     if (!user || !(await user.correctPassword(password, user.password))) {
