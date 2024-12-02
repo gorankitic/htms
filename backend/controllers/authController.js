@@ -52,12 +52,12 @@ exports.login = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
     // Check if email and password exists
     if (!email || !password) {
-        return next(new AppError("Please provide email and password.", 400));
+        return next(new AppError("Молимо прослиједите адресу електронске поште и лозинку.", 400));
     }
     // Check if user with this email exist and is password correct?
     const user = await User.findOne({ email }).select("+password");
     if (!user || !(await user.correctPassword(password, user.password))) {
-        return next(new AppError("Неисправна емаил адреса или лозинка.", 401));
+        return next(new AppError("Неисправна адреса електронске поште или лозинка.", 401));
     }
     // Create JWT and send it in cookie and send response
     createSendToken(user, 200, res);
