@@ -1,10 +1,10 @@
 // hooks
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 // assets
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 // libs
 import { PAGE_SIZE } from "../utils/constants";
-import { useEffect } from "react";
 
 const Pagination = ({ count, numPages, numElementsPerPage }) => {
     const [searchParams, setSearchParams] = useSearchParams();
